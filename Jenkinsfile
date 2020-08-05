@@ -25,7 +25,7 @@ pipeline{
     }             
     stage ('Deploy') {
         steps {
-            bat 
+           echo "Deploying to stage Environment for more tests"; 
         }
     }     
 }
