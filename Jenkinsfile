@@ -1,7 +1,7 @@
 pipeline{
     agent any
     tools {
-         tool name: 'Maven 3.6.3', type: 'maven'
+         'Maven 3.6.3', type: 'maven'
     }
     stages{
         stage('compile stage') {
@@ -22,10 +22,4 @@ pipeline{
                   bat 'mvn clean install sonar: sonar'
               }
       }
-    }             
-    stage ('Deploy') {
-        steps {
-           echo "Deploying to stage Environment for more tests"; 
-        }
-    }     
-}
+    }
