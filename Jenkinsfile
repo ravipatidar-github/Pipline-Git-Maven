@@ -1,9 +1,31 @@
-node{
-    stage('SCM Checkout'){
-      git 'https://github.com/ravipatidar-github/Pipline-Git-Maven'
+pipeline{
+    agent any
+    tools {
+          maven 'mvn'
+    }
+    stages{
+        stage('compile stage') {
+              steps {
+                  bat "mvn clean install"
+                  
+              }
+           }
+              stage('Testing stage') {
+              steps {
+                  bat "mvn test"
+                  
+              }
+           }
+               stage('build & sonarqube analysis') {
+              steps {
+                  withSonarQubeEnv('sonarqube')
+                  bat 'mvn clean package sonar: sonar'
+              }
       }
-      stage ('Compile-Package'){
-      sh 'mvn package'
-      }
-      
- }
+    }             
+    stage ('Deploy') {
+        steps {
+            bat 
+        }
+    }     
+}
